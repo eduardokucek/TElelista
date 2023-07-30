@@ -17,23 +17,22 @@ export const ModalAddContact = ({
     const response = await api.post<Contact>("/contacts", data);
 
     setContacts((previousContacts) => [response.data, ...previousContacts]);
-  };
 
-  const teste = async () => {
-    console.log("TESTE");
+    toggleModal();
   };
 
   return (
     <Modal toggleModal={toggleModal}>
-      <form onSubmit={handleSubmit(teste)}>
-        {/* <label htmlFor="text">Nome</label>
+      <form onSubmit={handleSubmit(createContact)}>
+        <label htmlFor="text">Nome</label>
         <input type="text" id="name" {...register("name")} />
 
         <label htmlFor="email">E-mail</label>
         <input type="email" id="email" {...register("email")} />
 
         <label htmlFor="text">Telefone</label>
-        <input type="text" id="phone" {...register("phone")} /> */}
+        <input type="text" id="phone" {...register("phone")} />
+
         <button type="submit">Salvar</button>
       </form>
     </Modal>

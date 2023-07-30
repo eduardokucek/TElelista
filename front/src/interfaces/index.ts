@@ -36,3 +36,11 @@ export interface ModalAddContactProps {
   toggleModal: () => void;
   setContacts: Dispatch<React.SetStateAction<Contact[]>>;
 }
+
+export interface ModalErrorProps {
+  toggleModal: () => void;
+}
+
+export interface AxiosInterceptorProps {
+  children: ReactNode;
+}

@@ -7,6 +7,7 @@ export const Card = ({ contact }: CardProps) => {
       {contact.name}
       {contact.email}
       {contact.phone}
+      {contact.createdAt}
     </Container>
   );
 };

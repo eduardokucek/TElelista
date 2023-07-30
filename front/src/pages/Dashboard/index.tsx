@@ -9,6 +9,8 @@ export const Dashboard = () => {
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [isOpenModal, setIsOpenModal] = useState(false);
 
+  const toggleModal = () => setIsOpenModal(!isOpenModal);
+
   useEffect(() => {
     (async () => {
       const response = await api.get<Contact[]>("/contacts");
@@ -16,8 +18,6 @@ export const Dashboard = () => {
       setContacts(response.data);
     })();
   }, []);
-
-  const toggleModal = () => setIsOpenModal(!isOpenModal);
 
   return (
     <>
@@ -37,7 +37,6 @@ export const Dashboard = () => {
           <List>
             {contacts.map((contact) => (
               <Card key={contact.id} contact={contact} />
-              // <li key={contact.id}>{contact.name}</li>
             ))}
           </List>
         </main>

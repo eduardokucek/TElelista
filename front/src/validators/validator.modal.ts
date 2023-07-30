@@ -10,7 +10,7 @@ export const contactSchema = z.object({
     .email()
     .max(45, "O e-mail não pode ter mais que 45 caracteres"),
   phone: z.string().max(14, "O telefone tem números a mais"),
-  createdAt: z.string(),
+  createdAt: z.string().optional(),
 });
 
 export type ContactData = z.infer<typeof contactSchema>;
