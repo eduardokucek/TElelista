@@ -1,5 +1,6 @@
 import React, { Dispatch, ReactNode } from "react";
 import { LoginData } from "../validators/validator.login";
+import { RegisterData } from "../validators/validator.register";
 
 export interface AuthProviderProps {
   children: ReactNode;
@@ -12,6 +13,19 @@ export interface LoginResponse {
 export interface AuthContextValues {
   signIn: (data: LoginData) => Promise<void>;
   loading: boolean;
+}
+
+export interface RegisterContextValues {
+  register: (data: RegisterData) => Promise<void>;
+}
+
+export interface User {
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+  password: string;
+  createdAt: string;
 }
 
 export interface Contact {

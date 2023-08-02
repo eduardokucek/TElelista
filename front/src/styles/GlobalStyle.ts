@@ -39,6 +39,7 @@ export default createGlobalStyle`
     padding: 0;
     outline:0;
     box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
   }
 
   body,html{
@@ -54,9 +55,17 @@ export default createGlobalStyle`
     overflow-x: hidden;
   }
 
-  body, input, button, textarea {
-    font-family: 'Inter';
-    font-size: 1.6rem;
+  body, input, textarea {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.4rem;
+  }
+
+  button {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.3rem;
+    border: none;
+    border-radius: 4px;
+    cursor: none;
   }
 
   h1, h2, h3, h4, h5, h6, strong{
