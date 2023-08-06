@@ -8,6 +8,8 @@ const updateUserService = async (
   data: TUserUpdate,
   userId: number
 ): Promise<TUserResponse> => {
+  console.log("ENTROU NO SERVICE");
+
   const userRepository = AppDataSource.getRepository(User);
   const actualUserData = await userRepository.findOneBy({ id: userId });
 

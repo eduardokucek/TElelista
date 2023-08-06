@@ -8,9 +8,17 @@ export const ModalForm = styled.form`
   > input {
     height: 26px;
   }
+`;
+
+export const FormButtons = styled.div`
+  display: flex;
+  height: 100%;
+  width: 100%;
+  gap: 1rem;
 
   > button {
     margin-top: 1rem;
     height: 26px;
+    width: 100%;
   }
 `;

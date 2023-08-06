@@ -4,6 +4,7 @@ import { ContactData, contactSchema } from "../../validators/validator.modal";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Modal } from "../../pages/Modal";
 import { api } from "../../services/api";
+import { ModalForm } from "./style";
 
 export const ModalAddContact = ({
   toggleModal,
@@ -23,7 +24,7 @@ export const ModalAddContact = ({
 
   return (
     <Modal toggleModal={toggleModal}>
-      <form onSubmit={handleSubmit(createContact)}>
+      <ModalForm onSubmit={handleSubmit(createContact)}>
         <label htmlFor="text">Nome</label>
         <input type="text" id="name" {...register("name")} />
 
@@ -34,7 +35,7 @@ export const ModalAddContact = ({
         <input type="text" id="phone" {...register("phone")} />
 
         <button type="submit">Salvar</button>
-      </form>
+      </ModalForm>
     </Modal>
   );
 };

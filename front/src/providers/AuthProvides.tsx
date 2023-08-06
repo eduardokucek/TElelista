@@ -14,6 +14,21 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
+  // const findUser = async () => {
+  //   const token = localStorage.getItem("telelista:token");
+  //   if (token) {
+  //     const payload = jwt.verify(token, "secret-key");
+
+  //     const userId = payload.sub;
+  //     const user = await api.get<User | null>(`/user/${userId}}`);
+
+  //     setUser(user);
+  //     if (user) {
+  //     }
+  //     console.log(user);
+  //   }
+  // };
+
   useEffect(() => {
     const token = localStorage.getItem("telelista:token");
 
@@ -23,6 +38,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
 
     api.defaults.headers.Authorization = `Bearer ${token}`;
+
     setLoading(false);
   }, []);
 
@@ -33,6 +49,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       const { token } = response.data;
       api.defaults.headers.Authorization = `Bearer ${token}`;
       localStorage.setItem("telelista:token", token);
+
       setLoading(false);
 
       navigate("dashboard");

@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
   createUserController,
+  listUserByIdController,
   updateUserController,
 } from "../controller/user.controller";
 import { ensureDataIsValidMiddleware } from "../middlewares/ensureDataIsValid.middleware";
@@ -16,8 +17,9 @@ userRoutes.post(
   ensureUserDataAlreadyExistsMiddleware,
   createUserController
 );
+userRoutes.get("/:id", ensureAuthMiddleware, listUserByIdController);
 userRoutes.patch(
-  "",
+  "/:id",
   ensureAuthMiddleware,
   ensureDataIsValidMiddleware(userSchemaUpdate),
   updateUserController

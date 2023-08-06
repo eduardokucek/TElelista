@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
-import { Contact } from "../../interfaces";
+import { Contact, User } from "../../interfaces";
 import { api } from "../../services/api";
 import { Container, List } from "./style";
 import { Card } from "../../components/Card";
 import { ModalAddContact } from "../../components/ModalAddContact";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../components/Loading";
+import jwt_decode from "jwt-decode";
 
 export const Dashboard = () => {
+  const [user, setUser] = useState<User>();
   const [contacts, setContacts] = useState<Contact[]>([]);
-  const [isOpenModal, setIsOpenModal] = useState(false);
   const [removeLoading, setRemoveLoading] = useState(false);
+  const [isOpenModal, setIsOpenModal] = useState(false);
 
   const navigate = useNavigate();
 
@@ -23,15 +25,23 @@ export const Dashboard = () => {
 
   useEffect(() => {
     setTimeout(() => {
+      async function loadUserData() {
+        const token = localStorage.getItem("telelista:token");
+        const decoded = jwt_decode(token!);
+        const foundUser = await api.get<User>(`/users/${decoded.sub!}`);
+        setUser(foundUser.data!);
+      }
       async function loadContacts() {
         try {
           const response = await api.get<Contact[]>("/contacts");
+
           setContacts(response.data);
           setRemoveLoading(true);
         } catch (error) {
           console.log(error);
         }
       }
+      loadUserData();
       loadContacts();
     }, 1500);
   }, []);
@@ -44,27 +54,32 @@ export const Dashboard = () => {
             Novo
           </button>
           <button type="button" onClick={handleLogOut}>
-            {" "}
             Sair
           </button>
         </header>
+
         {isOpenModal && (
           <ModalAddContact
-            setContacts={setContacts}
             toggleModal={toggleModal}
+            setContacts={setContacts}
           />
         )}
         <main>
+          {user && <h3>Olá, {user.name}</h3>}
           {!removeLoading && <Loading />}
-          {contacts.length == 0 ? (
+          {contacts.length > 0 ? (
             <List>
-              <li>Você não possui nenhum contato cadastrado</li>
+              {contacts.map((contact) => (
+                <Card
+                  key={contact.id}
+                  contact={contact}
+                  setContacts={setContacts}
+                />
+              ))}
             </List>
           ) : (
             <List>
-              {contacts.map((contact) => (
-                <Card key={contact.id} contact={contact} />
-              ))}
+              <li>Você não possui nenhum contato cadastrado</li>
             </List>
           )}
         </main>

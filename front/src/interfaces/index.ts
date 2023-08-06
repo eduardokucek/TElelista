@@ -6,6 +6,10 @@ export interface AuthProviderProps {
   children: ReactNode;
 }
 
+export interface UserProviderProps {
+  children: ReactNode;
+}
+
 export interface LoginResponse {
   token: string;
 }
@@ -25,7 +29,7 @@ export interface User {
   email: string;
   phone: string;
   password: string;
-  createdAt: string;
+  createdAt?: string;
 }
 
 export interface Contact {
@@ -38,17 +42,30 @@ export interface Contact {
 
 export interface CardProps {
   contact: Contact;
+  setContacts: Dispatch<React.SetStateAction<Contact[]>>;
 }
 
 export interface ModalProps {
-  toggleModal: () => void;
   children: ReactNode;
   blockClosing?: boolean;
+  toggleModal: () => void;
 }
 
 export interface ModalAddContactProps {
-  toggleModal: () => void;
   setContacts: Dispatch<React.SetStateAction<Contact[]>>;
+  toggleModal: () => void;
+}
+
+export interface ModalEditContactProps {
+  contact: Contact;
+  setContacts: Dispatch<React.SetStateAction<Contact[]>>;
+  toggleModal: () => void;
+}
+
+export interface ModalEditUserProps {
+  user: User;
+  setUser: Dispatch<React.SetStateAction<User>>;
+  toggleModal: () => void;
 }
 
 export interface ModalErrorProps {

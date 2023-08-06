@@ -19,3 +19,7 @@ Para utilizar o software:
 Bom proveito! 
 
 # :) #
+
+npm run typeorm migration:generate ./src/migrations/initialMigration -- -d ./src/data-source.ts
+
+npm run typeorm migration:run -- -d ./src/data-source

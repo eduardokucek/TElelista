@@ -4,13 +4,13 @@ export const Container = styled.li`
   display: flex;
   flex-direction: column;
   height: 144px;
-  width: 300px;
+  width: 340px;
+  margin: 10px;
   padding: 1rem;
   gap: 1rem;
+  border-radius: 4px;
   background-color: var(--color-gray-300);
   color: var(--color-gray-900);
-
-  margin: 10px;
 `;
 
 export const Data = styled.div`

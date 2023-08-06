@@ -13,6 +13,8 @@ export const Register = () => {
     resolver: zodResolver(registerSchema),
   });
 
+  localStorage.removeItem("telelista:token");
+
   const navigate = useNavigate();
 
   const createUser = async (data: RegisterData) => {

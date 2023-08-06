@@ -3,6 +3,7 @@ import { LoginData, loginSchema } from "../../validators/validator.login";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuth } from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
+import { ContactImg, Container } from "./style";
 
 export const Login = () => {
   const { register, handleSubmit } = useForm<LoginData>({
@@ -12,7 +13,8 @@ export const Login = () => {
   const { signIn } = useAuth();
 
   return (
-    <main>
+    <Container>
+      <ContactImg />
       <h2>Login</h2>
       <form onSubmit={handleSubmit(signIn)}>
         <label htmlFor="email">E-mail</label>
@@ -22,6 +24,6 @@ export const Login = () => {
         <button type="submit">Entrar</button>
         <Link to="/register">Ainda não tem cadastro, clique aqui</Link>
       </form>
-    </main>
+    </Container>
   );
 };
