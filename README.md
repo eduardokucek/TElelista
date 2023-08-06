@@ -1,25 +1,43 @@
 TELELISTA - sua lista de contato
 
 Para utilizar o software:
+
 1. Faça o clone do repositório em seu computador
-2. Crie no diretório "back" um arquivo chamado ".env" conforme o arquivo ".env.example"
-3. No terminal, acesse o diretório "back" e digite os seguintes comandos:
--- para instalar as dependências
+2. No PostgreSQL, crie um banco de dados
+3. No diretório "back", crie um arquivo chamado ".env", seguindo o exemplo do arquivo ".env.example", onde será preenchido os dados de acesso ao banco de dados.
+4. No terminal, acesse o diretório "back" e digite os seguintes comandos:
+
+# npm run typeorm migration:generate ./src/migrations/initialMigration -- -d ./src/data-source.ts
+
+(Para gerar as migrações do banco de dados)
+
+# npm run typeorm migration:run -- -d ./src/data-source
+
+(Para criar as tabelas do banco de dados)
+
 # npm i
--- para rodar o banco de dados
+
+(Para instalar as dependências do back end)
+
 # npm run dev
-4. Ainda no terminal acesse o diretório "front" e digite:
+
+(Para iniciar o banco de dados)
+
+4. Abra outro terminal, acesse o diretório "front" e digite:
+
 # npm i
--- para instalar as dependências
+
+(Para instalar as dependências do front end)
+
 # npm run dev
--- para rodar o site
 
-5. Feito isso, acesse o link apresentado no terminal (exemplo: http://localhost:5173/) 
+(Para iniciar o front end)
 
-Bom proveito! 
+5. Feito isso, acesse o link apresentado no terminal (exemplo: http://localhost:5173/)
+   Dessa forma, você terá acesso às funcionalidades do sistema.
 
-# :) #
+Lembrando que é importante iniciar ambos os servidores do "front" e do "back" com o comando "npm run dev", cada qual em um terminal.
 
-npm run typeorm migration:generate ./src/migrations/initialMigration -- -d ./src/data-source.ts
+Bom proveito!
 
-npm run typeorm migration:run -- -d ./src/data-source
+# :)
