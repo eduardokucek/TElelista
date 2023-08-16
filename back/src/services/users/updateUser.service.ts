@@ -1,3 +1,4 @@
+import { hash } from "bcryptjs";
 import { AppDataSource } from "../../data-source";
 import { User } from "../../entities/user.entities";
 import { AppError } from "../../errors/AppError";
@@ -14,7 +15,23 @@ const updateUserService = async (
   const actualUserData = await userRepository.findOneBy({ id: userId });
 
   if (!actualUserData) {
-    throw new AppError("Contact not found :/", 404);
+    throw new AppError("Contact not found", 404);
+  }
+
+  if (data.password) {
+    const hashedPassword = await hash(data.password, 10);
+    console.log(hashedPassword);
+
+    const newUserData = userRepository.create({
+      ...actualUserData,
+      ...data,
+      password: hashedPassword,
+    });
+    console.log(newUserData);
+
+    await userRepository.save(newUserData);
+
+    return contactSchema.parse(newUserData);
   }
 
   const newUserData = userRepository.create({

@@ -9,7 +9,7 @@ import cors from "cors";
 
 const app: Application = express();
 app.use(express.json());
-app.use(cors({ origin: "http://localhost:5173", optionsSuccessStatus: 200 }));
+app.use(cors({ origin: "*", optionsSuccessStatus: 200 }));
 app.use("/session", sessionRoutes);
 app.use("/users", userRoutes);
 app.use("/contacts", contactsRoutes);

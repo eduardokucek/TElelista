@@ -65,7 +65,7 @@ export interface ModalEditContactProps {
 export interface ModalEditUserProps {
   user: User;
   setUser: Dispatch<React.SetStateAction<User>>;
-  toggleModal: () => void;
+  toggleUserModal: () => void;
 }
 
 export interface ModalErrorProps {

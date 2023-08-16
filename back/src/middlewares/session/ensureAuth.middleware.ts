@@ -22,14 +22,14 @@ const ensureAuthMiddleware = async (
     (error: any, decoded: any) => {
       if (error) {
         return res.status(401).json({
-          message: "invalid token",
+          message: "Invalid token",
         });
       }
       res.locals.userId = decoded.sub;
-
-      return next();
     }
   );
+
+  return next();
 };
 
 export { ensureAuthMiddleware };
