@@ -14,21 +14,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  // const findUser = async () => {
-  //   const token = localStorage.getItem("telelista:token");
-  //   if (token) {
-  //     const payload = jwt.verify(token, "secret-key");
-
-  //     const userId = payload.sub;
-  //     const user = await api.get<User | null>(`/user/${userId}}`);
-
-  //     setUser(user);
-  //     if (user) {
-  //     }
-  //     console.log(user);
-  //   }
-  // };
-
   useEffect(() => {
     const token = localStorage.getItem("telelista:token");
 

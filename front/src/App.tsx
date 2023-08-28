@@ -1,5 +1,5 @@
 import { AxiosInterceptor } from "./AxiosInterceptor";
-import { AuthProvider } from "./providers/AuthProvides";
+import { AuthProvider } from "./providers/AuthProviders";
 import { RoutesMain } from "./routes";
 import GlobalStyle from "./styles/GlobalStyle";
 

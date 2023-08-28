@@ -23,23 +23,23 @@ const createContactService = async (
     throw new AppError("User not found", 404);
   }
 
-  const contactEmail = await contactRepository.findOne({
-    where: {
-      email: data.email,
-      user: user,
-    },
-  });
+  // const contactEmail = await contactRepository.findOne({
+  //   where: {
+  //     email: data.email,
+  //     user: user,
+  //   },
+  // });
 
-  const contactPhone = await contactRepository.findOne({
-    where: {
-      phone: data.phone,
-      user: user,
-    },
-  });
+  // const contactPhone = await contactRepository.findOne({
+  //   where: {
+  //     phone: data.phone,
+  //     user: user,
+  //   },
+  // });
 
-  if (contactEmail || contactPhone) {
-    throw new AppError("Contact already exists", 409);
-  }
+  // if (contactEmail || contactPhone) {
+  //   throw new AppError("Contact already exists", 409);
+  // }
 
   const contact = contactRepository.create({ ...data, user });
 

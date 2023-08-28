@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { createUserService } from "../services/users/createUser.service";
 import { updateUserService } from "../services/users/updateUser.service";
 import { listUserByIdService } from "../services/users/listUserById.service";
+import { deleteUserService } from "../services/users/deleteUser.service";
 
 const createUserController = async (
   req: Request,
@@ -25,14 +26,20 @@ const updateUserController = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  console.log("ENTROU NO CONTROLLER");
-
   const updateUser = await updateUserService(req.body, res.locals.userId);
 
   return res.json(updateUser);
 };
 
-const deleteUserController = async () => {};
+const deleteUserController = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const userId: number = parseInt(req.params.id);
+  await deleteUserService(userId);
+
+  return res.status(204).send();
+};
 
 export {
   createUserController,

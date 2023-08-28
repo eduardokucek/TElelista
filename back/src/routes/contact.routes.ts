@@ -11,7 +11,6 @@ import {
   listContactsController,
   updateContactsController,
 } from "../controller/contacts.controller";
-import { ensureUserIsOwnerMiddleware } from "../middlewares/users/ensureUserIsOwner.middleware";
 
 const contactsRoutes = Router();
 
@@ -19,21 +18,16 @@ contactsRoutes.post(
   "",
   ensureAuthMiddleware,
   ensureDataIsValidMiddleware(contactSchemaRequest),
+
   createContactsController
 );
 contactsRoutes.get("", ensureAuthMiddleware, listContactsController);
 contactsRoutes.patch(
   "/:id",
   ensureAuthMiddleware,
-  ensureUserIsOwnerMiddleware,
   ensureDataIsValidMiddleware(contactSchemaUpdate),
   updateContactsController
 );
-contactsRoutes.delete(
-  "/:id",
-  ensureAuthMiddleware,
-  ensureUserIsOwnerMiddleware,
-  deleteContactsController
-);
+contactsRoutes.delete("/:id", ensureAuthMiddleware, deleteContactsController);
 
 export { contactsRoutes };

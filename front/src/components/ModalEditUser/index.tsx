@@ -8,6 +8,7 @@ import {
 import { ModalForm, FormButtons } from "./style";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { api } from "../../services/api";
+import { useNavigate } from "react-router-dom";
 
 export const ModalEditUser = ({
   toggleUserModal,
@@ -18,13 +19,13 @@ export const ModalEditUser = ({
     resolver: zodResolver(userUpdateSchema),
   });
 
+  const navigate = useNavigate();
+
   const updateUser = async (data: UserUpdateData) => {
     if (!data.password) {
-      const foundUser = await api.get<User>(`/users/${user.id}`);
+      const { name, email, phone } = data;
 
-      const oldPassword = foundUser.data.password;
-
-      const userDataToUpdate = { ...data, password: oldPassword };
+      const userDataToUpdate = { name, email, phone };
 
       const response = await api.patch(`/users/${user.id}`, userDataToUpdate);
 
@@ -33,21 +34,14 @@ export const ModalEditUser = ({
 
     const response = await api.patch<User>(`/users/${user.id}`, data);
     setUser(response.data);
-    // if (data.password) {
-    //   const response = await api.patch(`/users/${user.id}`, data);
-    //   setUser(response.data);
-    // } else {
-    //   const userData = await api.get<User>(`/users/${user.id}`);
-
-    //   const oldPassword = userData.data.password;
-    //   const dataToUpdate = { data.password: oldPassword };
-
-    //   const response = await api.patch(`/users/${user.id}`, dataToUpdate);
-
-    //   setUser(response.data);
-    // }
 
     toggleUserModal();
+  };
+
+  const deleteUser = async () => {
+    await api.delete(`/users/${user.id}`);
+
+    navigate("/");
   };
 
   return (
@@ -90,6 +84,13 @@ export const ModalEditUser = ({
             Cancelar
           </button>
         </FormButtons>
+        <button
+          onClick={() => {
+            deleteUser();
+          }}
+        >
+          Excluir
+        </button>
       </ModalForm>
     </Modal>
   );
